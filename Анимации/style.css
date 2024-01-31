@@ -1,0 +1,26 @@
+div {
+    margin: 100px;
+    width: 200px;
+    height: 200px;
+    background-color: darkorange;
+
+    animation-name: anim1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes anim1 {
+    25% {
+        transform: translate(50px, 0);
+    }
+    50% {
+        transform: translate(50px, 50px);
+    }
+    75% {
+        transform: translate(-50px, 50px);
+    }
+    100% {
+        transform: translate(-50px, -50px);
+    }
+}
