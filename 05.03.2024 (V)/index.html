@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Контрольная</title>
+</head>
+<script>
+    function isValid(str) {
+        const stack = [];
+        const openBrackets = '([{';
+        const closeBrackets = ')]}';
+
+        for (let i = 0; i < str.length; i++) {
+            if (openBrackets.includes(str[i])) {
+                stack.push(str[i]);
+            } else if (closeBrackets.includes(str[i])) {
+                const lastOpenBracket = stack.pop();
+                if (openBrackets.indexOf(lastOpenBracket) !== closeBrackets.indexOf(str[i])) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.length === 0;
+    }
+
+    const inputString = '({[]})';
+    if (isValid(inputString)) {
+        console.log(`Правильно`);
+    } else {
+        console.log(`Неправильно`);
+    }
+</script>
+<body>
+
+</body>
+</html>

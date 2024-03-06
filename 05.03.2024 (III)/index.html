@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сортировка по частоте</title>
+</head>
+<style>
+    * {
+        font-size: x-large;
+    }
+</style>
+<script>
+    function sortByFreq(a) {
+        const arr = a.slice();
+        return arr.sort((a, b) => {
+            const countA = arr.filter(o => o === a).length;
+            const countB = arr.filter(o => o === b).length;
+            if (countA === countB) {
+                return a - b;
+            } else {
+                return countB - countA;
+            }
+        });
+    }
+
+    const arr = [45, 78, 1, 2, 2, 6, 6, 6, 7, 7, 7, 7, 7, 7, 11, 22];
+    const sortedArr = sortByFreq(arr);
+    document.write(arr);
+    document.write("<br>");
+    document.write(sortedArr);
+</script>
+<body>
+
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Контрольная работа</title>
+</head>
+<script>
+    function reverse(num) {
+        let res = 0;
+        while (num > 0) {
+            res = (res * 10) + (num % 10);
+            num = Math.floor(num / 10);
+        }
+        return res;
+    }
+    document.write(reverse(1234561234564));
+</script>
+<body>
+
+</body>
+</html>
