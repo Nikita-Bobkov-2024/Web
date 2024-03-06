@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ДЗ 07.02.2024</title>
+    <script>
+        /*
+            Написать функцию, которая принимает два числа n, m, и выводит все варианты расстановки чисел от 1 до n на m мест.
+        */
+        function generatePermutations(n, m) {
+            let result = [];
+
+            function permute(current, r) {
+                if (current.length === m) {
+                    result.push(current);
+                    return;
+                }
+
+                for (let i = 0; i < r.length; i++) {
+                    let next = current.concat(r[i]);
+                    let newR = r.slice(0, i).concat(r.slice(i + 1));
+                    permute(next, newR);
+                }
+            }
+
+            permute([], Array.from({length: n}, (_, i) => i + 1));
+
+            return result;
+        }
+
+        generatePermutations(6, 3).forEach(function(perm){document.write(perm.join(' ') + '<br>')});
+    </script>
+</head>
+<body>
+
+</body>
+</html>
