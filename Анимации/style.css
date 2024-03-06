@@ -3,7 +3,9 @@ div {
     width: 200px;
     height: 200px;
     background-color: darkorange;
+}
 
+.div-1 {
     animation-name: anim1;
     animation-duration: 5s;
     animation-iteration-count: infinite;

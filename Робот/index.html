@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--
+    * Дана таблица, в ячейках которой числа. Некоторые ячейки - "стенки" (имеют класс wall).
+    * Робот находится в верхнем левом углу. С помощью клавиш w, a, s, d можно двигать его в 4 направлениях.
+    * Через стенки проходить нельзя. При движении робот получает приз в размере числа, записанного в ячейке.
+    * Суммарный приз должен отображаться в каком-то DIV.
+    -->
+    <title>Робот</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid black;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: x-large;
+        }
+
+        #total {
+            font-size: x-large;
+        }
+
+        .current {
+            background-color: chartreuse;
+        }
+
+        .wall {
+            background-color: darkgray;
+        }
+
+        input[type="number"] {
+            font-size: x-large;
+            width: 150px;
+        }
+
+        input {
+            display: block;
+        }
+
+        .row {
+            float: left;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <label for="range_row">Кол-во строк:</label><input type="number" value="3" min="3" id="range_row"
+                                                       onchange="generateTable()">
+</div>
+<div>
+    <label for="range_col">Кол-во столбцов:</label><input type="number" value="3" min="3" id="range_col"
+                                                          onchange="generateTable()">
+</div>
+<br>
+<table id="board"></table>
+<div id="total">Total: 0</div>
+<script>
+
+    let total = 0;
+
+    function generateTable() {
+        total = 0;
+        document.getElementById('total').textContent = `Total: ${total}`;
+        let rowCount = document.getElementById('range_row').value;
+        let colCount = document.getElementById('range_col').value;
+        let table = document.getElementById('board');
+        table.innerHTML = '';
+        for (let i = 0; i < rowCount; i++) {
+            let row = table.insertRow();
+            for (let j = 0; j < colCount; j++) {
+                let cell = row.insertCell();
+                cell.textContent = `${1 + Math.floor(Math.random() * 10)}`;
+                if (i === 0 && j === 0) {
+                    cell.classList.add('current');
+                } else if (Math.random() < 0.2) {
+                    cell.classList.add('wall');
+                    cell.textContent = '';
+                }
+            }
+        }
+    }
+
+    generateTable();
+
+    let row, col;
+
+    document.addEventListener('keydown', function (event) {
+        let currentCell = document.querySelector('.current');
+        switch (event.key) {
+            case 'w':
+                row = currentCell.parentElement.previousElementSibling;
+                col = currentCell.cellIndex;
+                break;
+            case 'a':
+                row = currentCell.parentElement;
+                col = currentCell.cellIndex - 1;
+                break;
+            case 's':
+                row = currentCell.parentElement.nextElementSibling;
+                col = currentCell.cellIndex;
+                break;
+            case 'd':
+                row = currentCell.parentElement;
+                col = currentCell.cellIndex + 1;
+                break;
+        }
+        if (!row.cells[col].classList.contains('wall')) {
+            document.querySelector('.current').classList.remove('current');
+            row.cells[col].classList.add('current');
+            total += +row.cells[col].textContent;
+            document.getElementById('total').textContent = `Total: ${total}`;
+            currentCell.textContent = '';
+        }
+    })
+</script>
+</body>
+</html>
