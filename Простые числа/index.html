@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Простые числа</title>
+
+</head>
+<script>
+    function calc() {
+        let number = +document.getElementById("number").value;
+        let res = "Число простое!";
+        for (let i = 2; i < Math.sqrt(number) + 1; i++) {
+            if (number % i === 0) {
+                res = "Число составное!";
+                break;
+            }
+        }
+        document.getElementById("result").innerHTML = res;
+    }
+</script>
+<body>
+<input type="text" id="number">
+<input type="button" value="Посчитать" onclick="calc()">
+<div id="result"></div>
+</body>
+</html>
